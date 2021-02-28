@@ -1,0 +1,22 @@
+.product{
+    display: flex;
+    border-bottom: 2px solid gray;
+    margin-bottom: 5px;
+    margin-right: 20px;
+    padding-right: 20px;
+    padding-bottom: 5px;
+}
+.imageCls{
+    margin-right: 15px;
+}
+.nameCls{
+    color: blue;
+    font-weight:400;
+}
+.cartButton{
+    background-color: goldenrod;
+    width: 170px;
+    height: 40px;
+    border: 1px solid gainsboro;
+    border-radius: 5px;
+}
