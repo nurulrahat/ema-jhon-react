@@ -4,19 +4,27 @@ import fakeData from '../../fakeData';
 import Reviewitem from '../Reviewitem/Reviewitem';
 import Cart from '../Cart/Cart';
 import successImage from '../../images/giphy.gif'
+import { useHistory } from 'react-router';
 const Order = () => {
     const [cart, setCart] = useState([])
     const [orderItem, setOrderItem] = useState(false)
+    const history =useHistory()
+
     const removeProduct = (key) => {
         console.log('Removing', key)
         const dueCart = cart.filter(item => item.key !== key);
         setCart(dueCart)
         removeFromDatabaseCart(key)
     }
-    const handlePlaceOrder = () => {
-        setCart([])
-        processOrder()
-        setOrderItem(true)
+    //handle Place Order
+    // const handlePlaceOrder = () => {
+    //     setCart([])
+    //     processOrder()
+    //     setOrderItem(true)
+    // }
+
+    const handleOrderProcess = () => {
+        history.push("/shipment")
     }
 
     useEffect(() => {
@@ -49,7 +57,8 @@ const Order = () => {
             
             <div className="shopCart-container">
                 <Cart cart={cart}></Cart>
-                <button className="cartButton" onClick={handlePlaceOrder}>Place Order</button>
+                {/* <button className="cartButton" onClick={handlePlaceOrder}>Place Order</button> */}
+                <button className="cartButton" onClick={handleOrderProcess}>Order Process</button>
             </div>
         </div>
     );

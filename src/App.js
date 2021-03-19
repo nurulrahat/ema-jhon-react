@@ -11,13 +11,21 @@ import {
 } from "react-router-dom";
 import Nomatch from './components/Nomatch/Nomatch';
 import ProductDetails from './components/ProductDetail/ProductDetails';
+import LogIn from './components/LogIn/LogIn';
+import Shipment from './components/Shipment/Shipment';
+import { createContext, useState } from 'react';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
+export const UserContext=createContext() ;
 function App() {
+const [loggedInUser,setLoggedInUser]= useState({})
   return (
-    <div>
-      <Header></Header>
+    <UserContext.Provider value={[loggedInUser,setLoggedInUser]}>
+      <h2>Logged In from: {loggedInUser.email}</h2>
+    
      
      <Router>
+     <Header></Header>
        <Switch>
        <Route exact path="/">
          <Shop></Shop>
@@ -28,19 +36,25 @@ function App() {
        <Route path="/order">
          <Order></Order>
        </Route>
-       <Route path="/manage">
+       <PrivateRoute path="/manage">
          <Manage></Manage>
-       </Route>
+       </PrivateRoute>
       <Route path="/product/:productKey">
         <ProductDetails></ProductDetails>
       </Route>
+      <PrivateRoute path="/shipment">
+         <Shipment></Shipment>
+       </PrivateRoute>
+       <Route path="/login">
+         <LogIn></LogIn>
+       </Route>
        <Route path="*">
          <Nomatch></Nomatch>
        </Route>
        </Switch>
        
      </Router>
-    </div>
+    </UserContext.Provider>
   );
 }
 
